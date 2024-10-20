@@ -5,8 +5,8 @@ from TextToPdf import write_simple_pdf
 
 students = [line.strip().split(',') for line in open('/Users/CristobalLillo_1/TA/csc220-names.csv')]
 
-#usernames = [line[0] for line in lines]
-#print usernames
+usernames = [line[0] for line in lines]
+print (usernames)
 
 distadd = "/Users/CristobalLillo_1/Library/CloudStorage/Box-Box/"
 assignment = "Lab04"
@@ -70,7 +70,7 @@ def copy_assignment_with_name(dist_box, dist_disk):
 	copy submissions from Box to local  
 	"""
 	folders =  os.listdir(dist_box)
-	#students.sort()
+	students.sort()
 	copied_student = []
 	if not os.path.exists(dist_disk):
 		os.makedirs(dist_disk)
@@ -101,7 +101,7 @@ def copy_assignment_with_name_late(dist_box, dist_disk):
 	copy submissions from Box to local, for students with late submission   
 	"""
 	folders =  os.listdir(dist_box)
-	#students.sort()
+	students.sort()
 	copied_student = []
 	submited_students = [line.strip() for line in open(dist_disk+"/wednesday10am.txt")]
 	#print    submited_students
