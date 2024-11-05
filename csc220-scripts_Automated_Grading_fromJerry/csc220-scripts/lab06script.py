@@ -307,6 +307,10 @@ def check_assignment_for_student(dist_disk):
 			src_main = "/Users/CristobalLillo_1/TA/csc220-scripts_Automated_Grading_fromJerry/csc220-scripts/java/src/" + assignment.lower() + \
 				"/" + main_file
 			shutil.copyfile(src_main, package_folder + "/" + main_file)
+   
+			# this might not work, but importing the other classes into the angaramutil.java file
+   
+			add_imports_to_anagram_util(package_folder)
 
 			# now compile
 			javac_command = package_folder + "/" + main_file
@@ -372,6 +376,45 @@ def check_assignment_for_student(dist_disk):
 	for student in submission_wrong:
 		file.write(student[0] + ", " + student[1] + ", " + student[2] + "\n")
 	file.close()
+
+
+# this function will add the necessary imports to the AnagramUtil.java file
+# added by some TA trying to fix the issue, not by professor
+def add_imports_to_anagram_util(package_folder):
+    # find the AnagramUtil.java file
+    # add the imports to it
+    # this is a hack to fix the issue
+    # this is not the best way to do this
+    # but it works
+
+    anagram_util_file = os.path.join(package_folder, "AnagramUtil.java")
+    imports = """\
+import lab06.InsertionSort;
+import lab06.SortedString;
+import lab06.MergeSort;
+"""
+
+    # Check if AnagramUtil.java exists
+    if os.path.exists(anagram_util_file):
+        print(f"Adding imports to {anagram_util_file}")
+        # Read the existing content
+        with open(anagram_util_file, 'r') as file:
+            content = file.read()
+
+        # Prepend the import statements if not already present
+        if not content.startswith(imports):
+            content = imports + content
+
+            # Write the updated content back to the file
+            with open(anagram_util_file, 'w') as file:
+                file.write(content)
+                print(f"Added imports to {anagram_util_file}")
+
+
+
+
+
+
 
 
 def check_wrong_package_name(dist_disk):
