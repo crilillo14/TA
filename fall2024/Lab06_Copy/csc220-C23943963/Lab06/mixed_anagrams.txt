@@ -1,9 +1,0 @@
-apple
-banana
-car
-race
-arc
-cat
-tar
-rat
-art

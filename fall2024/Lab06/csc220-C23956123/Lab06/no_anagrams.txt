@@ -1,6 +1,0 @@
-apple
-ball
-pear
-grape
-strawberry
-peach

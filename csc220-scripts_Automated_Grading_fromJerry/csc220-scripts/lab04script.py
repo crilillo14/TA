@@ -5,14 +5,14 @@ from TextToPdf import write_simple_pdf
 
 students = [line.strip().split(',') for line in open('/Users/CristobalLillo_1/TA/csc220-names.csv')]
 
-usernames = [line[0] for line in lines]
-print (usernames)
+# usernames = [line[0] for line in lines]
+# print (usernames)
 
 distadd = "/Users/CristobalLillo_1/Library/CloudStorage/Box-Box/"
 assignment = "Lab04"
-assignmentfiles = ["Book.java","LibraryBookGeneric.java","LibraryGeneric.java","LibraryGenericTest.java", "PhoneNumber.java"]
-disk_main_add = "/Users/CristobalLillo_1/TA/fall2024/lab04/"
-compile_files =  ["Book.java","LibraryBookGeneric.java","LibraryGeneric.java", "PhoneNumber.java"]
+assignmentfiles = ["Book.java", "LibraryBook.java", "Library.java", "PhoneNumber.java"]
+disk_main_add = "/Users/CristobalLillo_1/TA/fall2024/Lab04/"
+compile_files = ["Book.java", "LibraryBook.java", "Library.java", "PhoneNumber.java"]
 main_file = "CheckLab.java"
 main_class = "CheckLab"
 actual_point = [15,5,15,10,10,10,10,10,15]
@@ -426,12 +426,12 @@ def replace_private_with_protected(disk_loc):
 
 
 def submit_grade_in_box(dist_disk,box_add):
-	#students.sort()
+	students.sort()
 	for student in students:
 		review_file = student[0]+"_"+assignment.lower()+"_comments"
 		disk_stu_lab_comment = dist_disk+"/"+"csc220-"+student[0]
 		box_stu_lab_comment = box_add+"csc220-"+student[0]
-		#shutil.copyfile(disk_main_add + "txt2pdf.py", disk_stu_lab_comment + "/" + "txt2pdf.py")
+		shutil.copyfile(disk_main_add + "txt2pdf.py", disk_stu_lab_comment + "/" + "txt2pdf.py")
 		python_run = "python " + disk_main_add + "txt2pdf.py" + " -qo " + disk_stu_lab_comment + "/" + review_file+".pdf" + " " \
 		+ disk_stu_lab_comment + "/" + review_file+".txt"
 		run = os.popen(python_run);
@@ -454,29 +454,28 @@ def does_pdf_exist(dist_disk,box_add):
 # comment and uncomment each as you grade; don't uncomment all at once 
 
 # first - just a check; no copying 
-check_shared_folder(distadd,assignment,assignmentfiles)
+# check_shared_folder(distadd,assignment,assignmentfiles)
 
 # second 
-#copy_assignment_with_name(distadd, disk_main_add+assignment);
+# copy_assignment_with_name(distadd, disk_main_add+assignment);
 # secnd for late - must check for lateness
-#copy_assignment_with_name_late(distadd, disk_main_add+assignment);
+# copy_assignment_with_name_late(distadd, disk_main_add+assignment);
 
 # this is for testing and printing 
-#submited_students = [line.strip() for line in open(disk_main_add+assignment+"/wednesday10am.txt")]
-#print   submited_students
+# submited_students = [line.strip() for line in open(disk_main_add+assignment+"/wednesday10am.txt")]
+# print(submited_students)
 
-#check_wrong_package_name(disk_main_add+assignment)   for testing bad packages
- 
 # third
-#check_wrong_package_name(disk_main_add+assignment)
-
+# check_wrong_package_name(disk_main_add+assignment) # for testing bad packages
+ 
 # pre-requisite to fourth 
-#replace_private_with_protected(disk_main_add+assignment)
+# replace_private_with_protected(disk_main_add+assignment)
 
 # fourth
-#check_assignment_for_student(disk_main_add+assignment)
+# check_assignment_for_student(disk_main_add+assignment)
 
 # fifth
 #put grade
 #submit_grade_in_box(disk_main_add+assignment,distadd);
 #does_pdf_exist(disk_main_add+assignment,distadd)
+

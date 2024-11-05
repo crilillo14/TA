@@ -10,7 +10,7 @@ students = [line.strip().split(',') for line in open(
 distadd = "/Users/CristobalLillo_1/Library/CloudStorage/Box-Box/"
 assignment = "Lab06"
 assignmentfiles = ["AnagramUtil.java"]
-disk_main_add = "/Users/CristobalLillo_1/TA/fall2024/"
+disk_main_add = "/Users/CristobalLillo_1/TA/fall2024/lab06/"
 compile_files = ["AnagramUtil.java"]
 main_file = "CheckLab.java"
 main_class = "CheckLab"
@@ -438,7 +438,7 @@ def does_pdf_exist(dist_disk, box_add):
 
 # comment and uncomment each as you grade; don't uncomment all at once
 # first - just a check; no copying
-#check_shared_folder(distadd,assignment,assignmentfiles)
+check_shared_folder(distadd,assignment,assignmentfiles)
 
 # second
 # copy_assignment_with_name(distadd, disk_main_add+assignment);
@@ -447,7 +447,7 @@ def does_pdf_exist(dist_disk, box_add):
 # check_wrong_package_name(disk_main_add+assignment)
 
 # fourth
-check_assignment_for_student(disk_main_add + assignment)
+# check_assignment_for_student(disk_main_add + assignment)
 
 # fifth - put grade
 #submit_grade_in_box(disk_main_add+assignment,distadd);

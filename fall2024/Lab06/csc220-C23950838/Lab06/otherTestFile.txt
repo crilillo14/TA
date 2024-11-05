@@ -1,5 +1,0 @@
-single
-double
-triple
-quadruple
-TUPLE
