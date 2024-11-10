@@ -10,7 +10,7 @@ students = [line.strip().split(',') for line in open(
 
 distadd = "/Users/CristobalLillo_1/Library/CloudStorage/Box-Box/"
 assignment = "Lab06"
-assignmentfiles = ["AnagramUtil.java" , ""]
+assignmentfiles = ["AnagramUtil.java"]
 disk_main_add = "/Users/CristobalLillo_1/TA/fall2024/lab06/"
 compile_files = ["AnagramUtil.java"]
 main_file = "CheckLab.java"
