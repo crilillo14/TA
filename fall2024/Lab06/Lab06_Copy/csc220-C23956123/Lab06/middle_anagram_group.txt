@@ -1,0 +1,6 @@
+apple
+banana
+least
+stale
+orange
+grape

@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3d4e2944-8653-417b-b398-eeb67439d510" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/csc220-scripts_Automated_Grading_fromJerry/csc220-scripts/lab06script.py" beforeDir="false" afterPath="$PROJECT_DIR$/csc220-scripts_Automated_Grading_fromJerry/csc220-scripts/lab06script.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fall2024/Lab06/Lab06/csc220-C23809451/Lab06/src/lab06/AnagramUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/fall2024/Lab06/Lab06/csc220-C23809451/Lab06/src/lab06/AnagramUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fall2024/Lab06/Lab06/csc220-C23960230/Lab06/src/lab06/AnagramUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/fall2024/Lab06/Lab06/csc220-C23960230/Lab06/src/lab06/AnagramUtil.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,9 +15,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2oRQuybw3hFbNHYxDwIOkQX9ocj" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -22,6 +25,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "grading06",
     "last_opened_file_path": "/Users/CristobalLillo_1/TA",

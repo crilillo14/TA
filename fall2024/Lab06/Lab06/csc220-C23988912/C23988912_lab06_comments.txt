@@ -1,0 +1,21 @@
+C23988912            Latif Shadi
+
+
+Comments:
+
+Program compiled but failed to run.
+
+Grading Rubric: 
+
+Submitted                      15/15
+Correct Submission              5/ 5
+Compiles                       10/10
+Runs                            0/ 5
+sort()                          0/10
+areAnagrams()                   0/10
+insertionSort()                 0/15
+getLargestAnagramGroup(file)    0/15
+getLargestAnagramGroup([])      0/15
+
+SCORE    30 / 100
+

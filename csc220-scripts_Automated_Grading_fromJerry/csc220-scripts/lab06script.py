@@ -10,9 +10,9 @@ students = [line.strip().split(',') for line in open(
 
 distadd = "/Users/CristobalLillo_1/Library/CloudStorage/Box-Box/"
 assignment = "Lab06"
-assignmentfiles = ["AnagramUtil.java"]
+assignmentfiles = ["AnagramUtil.java", "SortedString.java", "InsertionSort.java" , "MergeSort.java"]
 disk_main_add = "/Users/CristobalLillo_1/TA/fall2024/lab06/"
-compile_files = ["AnagramUtil.java"]
+compile_files = ["AnagramUtil.java", "SortedString.java", "InsertionSort.java", "MergeSort.java"]
 main_file = "CheckLab.java"
 main_class = "CheckLab"
 actual_point = [15, 5, 10, 5, 10, 10, 15, 15, 15]
@@ -225,6 +225,18 @@ def check_if_actually_not_submitted(dist_disk_loc):
 	return True            # not found any so true
 
 
+# debug function to check if the student's submission is correct -- made by Cristobal Li
+def debug_student_submission(student, stu_lab_file_loc, package_folder):
+    print(f"\nDebugging {student[0]}:")
+    print(f"Student folder exists: {os.path.exists(stu_lab_file_loc)}")
+    print(f"Package folder exists: {os.path.exists(package_folder)}")
+    print("Files in package folder:")
+    if os.path.exists(package_folder):
+        print("\n".join(os.listdir(package_folder)))
+    print("Required files present:")
+    for file in assignmentfiles:
+        print(f"{file}: {os.path.exists(os.path.join(package_folder, file))}")
+
 def check_assignment_for_student(dist_disk):
 	"""
 	submitted(15 points)
@@ -301,8 +313,8 @@ def check_assignment_for_student(dist_disk):
 
 		if is_copy:
 			source_folder = stu_lab_file_loc + "/" + assignment + "/src/"
-			package_folder = stu_lab_file_loc + "/" + \
-				assignment + "/src/" + assignment.lower()
+			package_folder = stu_lab_file_loc + "/" + assignment + "/src/" + assignment.lower()
+			debug_student_submission(student, stu_lab_file_loc, package_folder)
 			# copy my CheckLab.java into each of the student's lab folder
 			src_main = "/Users/CristobalLillo_1/TA/csc220-scripts_Automated_Grading_fromJerry/csc220-scripts/java/src/" + assignment.lower() + \
 				"/" + main_file
@@ -313,20 +325,19 @@ def check_assignment_for_student(dist_disk):
 			add_imports_to_anagram_util(package_folder)
 
 			# now compile
-			javac_command = package_folder + "/" + main_file
+			javac_command = ["javac"]
 			for cname in compile_files:
-				javac_command += " " + package_folder + "/" + cname
+				javac_command.append(package_folder + "/" + cname)
+			javac_command.append(package_folder + "/" + main_file)
 
-			# check to see if OrderStrings is present
-			if os.path.exists(package_folder + "/OrderStrings.java"):
-				javac_command += " " + package_folder + "/OrderStrings.java"
+			try:
+				result = subprocess.run(javac_command, capture_output=True, text=True)
+				is_compiled = result.returncode == 0
+				if not is_compiled:
+					print(f"Compilation error: {result.stderr}")
+			except Exception as e:
+				print(f"Error during compilation: {str(e)}")
 
-
-			javac_command = "javac " + javac_command
-			# print javac_command
-			compile = os.popen(javac_command)
-			output = compile.read()
-			is_compiled = compile.close()
 			output = "-1"
 			is_run_successfully = 1
 			# now run
@@ -352,13 +363,16 @@ def check_assignment_for_student(dist_disk):
 				assignment_checking_comments(stu_lab_comment, "Program has runtime error.\n")
 
 			if is_compiled is None and is_run_successfully is None:
-				message = output[output.index("$$") + 2:output.rindex("$$")].split("$$")
-				comments = output[output.rindex("$$") + 2:]
-				# get the grades
-				for i in range(0, len(message)):
-					submission_point[i + 4] = int(round(float(message[i])))
-
-				assignment_checking_comments(stu_lab_comment, comments + "\n")
+				print(f"Raw output: {output}")  # Debug
+				try:
+					message = output[output.index("$$") + 2:output.rindex("$$")].split("$$")
+					comments = output[output.rindex("$$") + 2:]
+					print(f"Parsed message: {message}")  # Debug
+					for i in range(0, len(message)):
+						submission_point[i + 4] = int(round(float(message[i])))
+				except Exception as e:
+					print(f"Error parsing output: {str(e)}")
+					assignment_checking_comments(stu_lab_comment, f"Error parsing test results: {str(e)}\n")
 
 		elif no_submission is False:
 			assignment_checking_comments(
@@ -377,38 +391,6 @@ def check_assignment_for_student(dist_disk):
 		file.write(student[0] + ", " + student[1] + ", " + student[2] + "\n")
 	file.close()
 
-
-# this function will add the necessary imports to the AnagramUtil.java file
-# added by some TA trying to fix the issue, not by professor
-def add_imports_to_anagram_util(package_folder):
-    # find the AnagramUtil.java file
-    # add the imports to it
-    # this is a hack to fix the issue
-    # this is not the best way to do this
-    # but it works
-
-    anagram_util_file = os.path.join(package_folder, "AnagramUtil.java")
-    imports = """\
-import lab06.InsertionSort;
-import lab06.SortedString;
-import lab06.MergeSort;
-"""
-
-    # Check if AnagramUtil.java exists
-    if os.path.exists(anagram_util_file):
-        print(f"Adding imports to {anagram_util_file}")
-        # Read the existing content
-        with open(anagram_util_file, 'r') as file:
-            content = file.read()
-
-        # Prepend the import statements if not already present
-        if not content.startswith(imports):
-            content = imports + content
-
-            # Write the updated content back to the file
-            with open(anagram_util_file, 'w') as file:
-                file.write(content)
-                print(f"Added imports to {anagram_util_file}")
 
 
 
@@ -497,3 +479,5 @@ check_assignment_for_student(disk_main_add + assignment)
 
 # sixth - verify pdf was uploaded
 # does_pdf_exist(disk_main_add+assignment,distadd)
+
+
