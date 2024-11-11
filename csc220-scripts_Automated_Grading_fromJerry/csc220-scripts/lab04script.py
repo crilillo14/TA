@@ -408,7 +408,10 @@ def check_wrong_package_name(dist_disk):
 		file.write(ms[0]+", " +ms[1]+", "+ms[2]+"\n");
 	file.close()
 	
+ 
+# outdated, lab04 fall 2024 doesn't have a LibraryGeneric.java file
 
+"""
 def replace_private_with_protected(disk_loc):
 	for student in students:
 		file_loc = disk_loc+"/"+"csc220-"+student[0]+"/"+assignment+"/src/"+assignment.lower()+"/LibraryGeneric.java"
@@ -423,7 +426,7 @@ def replace_private_with_protected(disk_loc):
 			print ("Done: "+student[0]+" "+student[1]+" "+student[2])
 		except:
 			print ("---- Error: "+student[0]+student[1]+student[2])
-
+"""
 
 def submit_grade_in_box(dist_disk,box_add):
 	students.sort()
@@ -454,7 +457,7 @@ def does_pdf_exist(dist_disk,box_add):
 # comment and uncomment each as you grade; don't uncomment all at once 
 
 # first - just a check; no copying 
-# check_shared_folder(distadd,assignment,assignmentfiles)
+check_shared_folder(distadd,assignment,assignmentfiles)
 
 # second 
 # copy_assignment_with_name(distadd, disk_main_add+assignment);
@@ -469,6 +472,7 @@ def does_pdf_exist(dist_disk,box_add):
 # check_wrong_package_name(disk_main_add+assignment) # for testing bad packages
  
 # pre-requisite to fourth 
+### FALL 2024: LibraryGeneric.java is not in the lab04 folder. Do not run this function.
 # replace_private_with_protected(disk_main_add+assignment)
 
 # fourth
