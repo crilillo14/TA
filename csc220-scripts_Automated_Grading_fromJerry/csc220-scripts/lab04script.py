@@ -457,10 +457,10 @@ def does_pdf_exist(dist_disk,box_add):
 # comment and uncomment each as you grade; don't uncomment all at once 
 
 # first - just a check; no copying 
-check_shared_folder(distadd,assignment,assignmentfiles)
+# check_shared_folder(distadd,assignment,assignmentfiles)
 
 # second 
-# copy_assignment_with_name(distadd, disk_main_add+assignment);
+copy_assignment_with_name(distadd, disk_main_add+assignment);
 # secnd for late - must check for lateness
 # copy_assignment_with_name_late(distadd, disk_main_add+assignment);
 
