@@ -2,11 +2,11 @@ package lab04;
 
 import java.util.GregorianCalendar;
 
-public class LibraryBookGeneric<Type> extends Book {
+public class LibraryBook<Type> extends Book {
 	Type holder;
 	GregorianCalendar dueDate;
 	
-	public LibraryBookGeneric (long isbn, String author, String title){
+	public LibraryBook (long isbn, String author, String title){
 		super(isbn, author, title);
 	}
 	

@@ -26,7 +26,7 @@ public class CheckLab {
       int []givenPoint = {10,10,10,15,10};
       String output = "";
       try{
-    	  	LibraryGenericRef<String> libRef = new LibraryGenericRef<String>();
+    	  	LibraryRef<String> libRef = new LibraryRef<String>();
     	  	
 		    libRef.add(1, "Thomas L. Friedman", "The World is Flat");
 		    libRef.add(99, "Jon Krakauer", "Into the Wild");
@@ -39,8 +39,8 @@ public class CheckLab {
 		    libRef.add(6000, "Test 3", "Test 3 1st book");
 		    libRef.add(111, "Test 3", "AAAAAAAAAA AAAAAAAAAAA");
 		    
-		    ArrayList<LibraryBookGeneric<String>> refISBN = libRef.getOrderedByISBNRef();
-		    ArrayList<LibraryBookGeneric<String>> testISBN = libRef.getInventoryList();
+		    ArrayList<LibraryBook<String>> refISBN = libRef.getOrderedByISBNRef();
+		    ArrayList<LibraryBook<String>> testISBN = libRef.getInventoryList();
 		    
 		    if(libRef.checkTwoLibrary(refISBN, testISBN)){
 		    	gradePoint[4] = 100;
@@ -48,9 +48,9 @@ public class CheckLab {
 		    	output += "## OrderByISBN is incorrect and doesn't sort properly\n";
 		    }
 		    
-		    ArrayList<LibraryBookGeneric<String>> refAutherSort = libRef.getOrderedByAuthorRef();
-		    ArrayList<LibraryBookGeneric<String>> refAutherOnlySort = libRef.getOrderedByAuthorOnlyRef();
-		    ArrayList<LibraryBookGeneric<String>> testAuthorSort = libRef.getOrderedByAuthor();
+		    ArrayList<LibraryBook<String>> refAutherSort = libRef.getOrderedByAuthorRef();
+		    ArrayList<LibraryBook<String>> refAutherOnlySort = libRef.getOrderedByAuthorOnlyRef();
+		    ArrayList<LibraryBook<String>> testAuthorSort = libRef.getOrderedByAuthor();
 		    
 		    if(libRef.checkTwoLibrary(refAutherSort, testAuthorSort)){
 		    	gradePoint[0] = 100;
@@ -149,7 +149,7 @@ public class CheckLab {
  * Class representation of a library (a collection of library books).
  * 
  */
-class LibraryGenericRef<Type> extends LibraryGeneric<Type>{
+class LibraryRef<Type> extends Library<Type>{
 	
 	 protected static <ListType> void sort(ArrayList<ListType> list,
 		      Comparator<ListType> c) {
@@ -202,11 +202,11 @@ class LibraryGenericRef<Type> extends LibraryGeneric<Type>{
 	  /**
 	   * Returns the list of library books, sorted by author
 	   */
-	  public ArrayList<LibraryBookGeneric<Type>> getOrderedByAuthorRef() {
+	  public ArrayList<LibraryBook<Type>> getOrderedByAuthorRef() {
 	    // *FILL IN -- do not return null
 	    //return null;
 		  
-		  ArrayList<LibraryBookGeneric<Type>> libraryCopy = new ArrayList<LibraryBookGeneric<Type>>();
+		  ArrayList<LibraryBook<Type>> libraryCopy = new ArrayList<LibraryBook<Type>>();
 		  libraryCopy.addAll(library);
 		  
 		  OrderByAuthorRef comparator = new OrderByAuthorRef();
@@ -216,11 +216,11 @@ class LibraryGenericRef<Type> extends LibraryGeneric<Type>{
 		  return libraryCopy;
 	  }
 
-	  public ArrayList<LibraryBookGeneric<Type>> getOrderedByAuthorOnlyRef() {
+	  public ArrayList<LibraryBook<Type>> getOrderedByAuthorOnlyRef() {
 		    // *FILL IN -- do not return null
 		    //return null;
 			  
-			  ArrayList<LibraryBookGeneric<Type>> libraryCopy = new ArrayList<LibraryBookGeneric<Type>>();
+			  ArrayList<LibraryBook<Type>> libraryCopy = new ArrayList<LibraryBook<Type>>();
 			  libraryCopy.addAll(library);
 			  
 			  OrderByOnlyAuthorRef comparator = new OrderByOnlyAuthorRef();
@@ -235,10 +235,10 @@ class LibraryGenericRef<Type> extends LibraryGeneric<Type>{
 	   *
 	   * If no library books are overdue, returns an empty list.
 	   */
-	  public ArrayList<LibraryBookGeneric<Type>> getOverdueListRef(int month, int day,
+	  public ArrayList<LibraryBook<Type>> getOverdueListRef(int month, int day,
 	      int year) {
 	    // FILL IN -- do not return null
-		  ArrayList<LibraryBookGeneric<Type>> libraryCopy = new ArrayList<LibraryBookGeneric<Type>>();
+		  ArrayList<LibraryBook<Type>> libraryCopy = new ArrayList<LibraryBook<Type>>();
 		  
 		  GregorianCalendar givenDueDate = new GregorianCalendar(year, month, day);
 		  
@@ -261,10 +261,10 @@ class LibraryGenericRef<Type> extends LibraryGeneric<Type>{
 	   * Comparator that defines an ordering among library books using the author,  and book title as a tie-breaker.
 	   */
 	  protected class OrderByAuthorRef implements 
-	Comparator<LibraryBookGeneric<Type>> {
+	Comparator<LibraryBook<Type>> {
 
 	    // *FILL IN
-		  public int compare(LibraryBookGeneric<Type> lhs, LibraryBookGeneric<Type> rhs){
+		  public int compare(LibraryBook<Type> lhs, LibraryBook<Type> rhs){
 			  if (lhs.getAuthor().equals(rhs.getAuthor()))
 				  return lhs.getTitle().compareTo(rhs.getTitle());
 			  else
@@ -273,10 +273,10 @@ class LibraryGenericRef<Type> extends LibraryGeneric<Type>{
 	  }
 
 	  protected class OrderByOnlyAuthorRef implements 
-		Comparator<LibraryBookGeneric<Type>> {
+		Comparator<LibraryBook<Type>> {
 
 		    // *FILL IN
-			  public int compare(LibraryBookGeneric<Type> lhs, LibraryBookGeneric<Type> rhs){
+			  public int compare(LibraryBook<Type> lhs, LibraryBook<Type> rhs){
 				 
 				  return lhs.getAuthor().compareTo(rhs.getAuthor());
 			  }
@@ -285,16 +285,16 @@ class LibraryGenericRef<Type> extends LibraryGeneric<Type>{
 	  /**
 	   * Comparator that defines an ordering among library books using the due date.
 	   */
-	  protected class OrderByDueDateRef implements Comparator<LibraryBookGeneric<Type>> {
+	  protected class OrderByDueDateRef implements Comparator<LibraryBook<Type>> {
 
 	    // *FILL IN
-		  public int compare(LibraryBookGeneric<Type> lhs, LibraryBookGeneric<Type> rhs){
+		  public int compare(LibraryBook<Type> lhs, LibraryBook<Type> rhs){
 			  return lhs.getDueDate().compareTo(rhs.getDueDate());
 		  }	  
 	  }
 	  
-	  public boolean checkTwoLibrary(ArrayList<LibraryBookGeneric<Type>> ref1,
-			  ArrayList<LibraryBookGeneric<Type>> test){
+	  public boolean checkTwoLibrary(ArrayList<LibraryBook<Type>> ref1,
+			  ArrayList<LibraryBook<Type>> test){
 		  if(ref1.size() != test.size())
 			  return false;
 		  try{
@@ -309,14 +309,14 @@ class LibraryGenericRef<Type> extends LibraryGeneric<Type>{
 		  return true;
 	  }
 	  
-	  public ArrayList<LibraryBookGeneric<Type>> getUnsortedList(){
-		  ArrayList<LibraryBookGeneric<Type>> libraryCopy = new ArrayList<LibraryBookGeneric<Type>>();
+	  public ArrayList<LibraryBook<Type>> getUnsortedList(){
+		  ArrayList<LibraryBook<Type>> libraryCopy = new ArrayList<LibraryBook<Type>>();
 		  libraryCopy.addAll(library);
 		  return libraryCopy;
 	  }
 	  
-	  public ArrayList<LibraryBookGeneric<Type>> getUnsortedDueList(){
-		  ArrayList<LibraryBookGeneric<Type>> libraryCopy = new ArrayList<LibraryBookGeneric<Type>>();
+	  public ArrayList<LibraryBook<Type>> getUnsortedDueList(){
+		  ArrayList<LibraryBook<Type>> libraryCopy = new ArrayList<LibraryBook<Type>>();
 		  for (int i = 0; i < library.size(); i++){
 			  if (library.get(i).getDueDate() != null){
 				 libraryCopy.add(library.get(i));
@@ -325,38 +325,38 @@ class LibraryGenericRef<Type> extends LibraryGeneric<Type>{
 		  return libraryCopy;
 	  }
 	  
-	  public ArrayList<LibraryBookGeneric<Type>> sortByStuAuthor(){
-		  ArrayList<LibraryBookGeneric<Type>> unsortList = getUnsortedList();
+	  public ArrayList<LibraryBook<Type>> sortByStuAuthor(){
+		  ArrayList<LibraryBook<Type>> unsortList = getUnsortedList();
 		  
-	    	Collections.sort(unsortList, new LibraryGeneric.OrderByAuthor());
+	    	Collections.sort(unsortList, new Library.OrderByAuthor());
 	    	return unsortList;
 	  }
 	  
-	  public ArrayList<LibraryBookGeneric<Type>> sortByStuDueDate(){
-		  	ArrayList<LibraryBookGeneric<Type>> unsortList = getUnsortedDueList();
+	  public ArrayList<LibraryBook<Type>> sortByStuDueDate(){
+		  	ArrayList<LibraryBook<Type>> unsortList = getUnsortedDueList();
 		  
-	    	Collections.sort(unsortList, new LibraryGeneric.OrderByDueDate());
+	    	Collections.sort(unsortList, new Library.OrderByDueDate());
 	    	return unsortList;
 	  }
 	  
-	  protected class OrderByIsbnRef implements Comparator<LibraryBookGeneric<Type>> {
+	  protected class OrderByIsbnRef implements Comparator<LibraryBook<Type>> {
 
 		    /**
 		     * Returns a negative value if lhs is smaller than rhs. Returns a positive
 		     * value if lhs is larger than rhs. Returns 0 if lhs and rhs are equal.
 		     */
-		    public int compare(LibraryBookGeneric<Type> lhs,
-		        LibraryBookGeneric<Type> rhs) {
+		    public int compare(LibraryBook<Type> lhs,
+		        LibraryBook<Type> rhs) {
 		      return (int) (lhs.getIsbn() - rhs.getIsbn());
 		    }
 		    
 		  }
 	  
-	  public ArrayList<LibraryBookGeneric<Type>> getOrderedByISBNRef() {
+	  public ArrayList<LibraryBook<Type>> getOrderedByISBNRef() {
 		    // *FILL IN -- do not return null
 		    //return null;
 			  
-			  ArrayList<LibraryBookGeneric<Type>> libraryCopy = new ArrayList<LibraryBookGeneric<Type>>();
+			  ArrayList<LibraryBook<Type>> libraryCopy = new ArrayList<LibraryBook<Type>>();
 			  libraryCopy.addAll(library);
 			  
 			  OrderByIsbnRef comparator = new OrderByIsbnRef();
